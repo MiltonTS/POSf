@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Cart</h2>
+<form method="post" action="{{ url_for('pos.checkout') }}">
+<table class="table">
+    <tr><th>Name</th><th>Qty</th><th>Price</th><th>Subtotal</th><th></th></tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>
+            <input type="number" name="qty" value="{{ item.qty }}" min="1" form="update-{{ item.product.id }}" class="form-control form-control-sm">
+        </td>
+        <td>
+            <input type="number" step="0.01" name="price" value="{{ '%.2f'|format(item.price) }}" form="update-{{ item.product.id }}" class="form-control form-control-sm">
+        </td>
+        <td>{{ '%.2f'|format(item.subtotal) }}</td>
+        <td>
+            <form method="post" id="update-{{ item.product.id }}" action="{{ url_for('pos.update_cart', product_id=item.product.id) }}">
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button class="btn btn-sm btn-secondary">Update</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <th colspan="3" class="text-end">Total</th>
+        <th>{{ '%.2f'|format(total) }}</th>
+        <th></th>
+    </tr>
+</table>
+<button class="btn btn-primary" type="submit">Checkout</button>
+</form>
+{% endblock %}
