@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Cart</h2>
+<form method="post" action="{{ url_for('pos.checkout') }}">
+<table class="table">
+    <tr><th>Name</th><th>Qty</th><th>Subtotal</th></tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.qty }}</td>
+        <td>{{ '%.2f'|format(item.subtotal) }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <th colspan="2" class="text-end">Total</th>
+        <th>{{ '%.2f'|format(total) }}</th>
+    </tr>
+</table>
+<button class="btn btn-primary" type="submit">Checkout</button>
+</form>
+{% endblock %}
