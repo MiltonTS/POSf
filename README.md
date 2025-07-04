@@ -24,6 +24,15 @@ Open `http://localhost:5000` in your browser.
 
 Use the **Upload** page to load an Excel file. The file should contain two columns: `name` and `price`. The first row is treated as the header.
 
+You can also pre-populate the database by providing the path to an Excel
+workbook using the `LOAD_PRODUCTS_FILE` configuration option. For example, to
+load a sheet called *Listado de Precios.xlsx* at start up, run:
+
+```bash
+export LOAD_PRODUCTS_FILE="/path/to/Listado de Precios.xlsx"
+python run.py
+```
+
 ## Running tests
 
 ```
