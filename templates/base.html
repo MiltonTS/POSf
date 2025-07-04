@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>POS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="p-3">
+    <nav class="mb-3">
+        <a href="{{ url_for('pos.index') }}">Products</a> |
+        <a href="{{ url_for('pos.view_cart') }}">Cart</a> |
+        <a href="{{ url_for('pos.upload') }}">Upload</a>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <main class="col-md-8">
+                {% block content %}{% endblock %}
+            </main>
+            <aside class="col-md-4">
+                {% include '_cart_sidebar.html' %}
+            </aside>
+        </div>
+    </div>
+</body>
+</html>

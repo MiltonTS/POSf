@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Products</h2>
+<table class="table">
+    <tr><th>Name</th><th>Price</th><th></th></tr>
+    {% for p in products %}
+    <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ '%.2f'|format(p.price) }}</td>
+        <td>
+            <a class="btn btn-sm btn-success"
+               href="{{ url_for('pos.add_to_cart', product_id=p.id) }}">Add</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
